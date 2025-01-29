@@ -218,7 +218,9 @@ func serveHTTP(rw http.ResponseWriter, r *http.Request) {
 		// Only GET and POST methods are supported.
 	case http.MethodOptions:
 		// This is required for CORS shit :)
-		rw.Header().Set("Allow", "GET,POST")
+		rw.Header().Set("Access-Control-Allow-Origin", "*")
+		rw.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+		rw.Header().Set("Allow", "GET,POST,OPTIONS")
 		return
 	default:
 		err := fmt.Errorf("%q: unsupported method %q", r.RemoteAddr, r.Method)
